@@ -397,7 +397,7 @@ export default function CompanyWebsite() {
                       <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                       <div>
                         <div className="text-sm font-medium">Phone</div>
-                        <div className="text-sm text-muted-foreground">+48 730 521 919</div>
+                        <div className="text-sm text-muted-foreground">+48 535 086 714</div>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
