@@ -87,13 +87,13 @@ export default function CompanyWebsite() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center gap-2">
               <img
-                src="/logo.jpg"
+                src="/terralabs-website/logo.jpg"
                 alt="Terra Labs Logo"
                 className="h-8 w-auto"
               />
               <span className="text-xl font-bold">Terra Labs</span>
             </div>
-            
+
             <div className="hidden md:flex items-center gap-8">
               <button onClick={() => scrollToSection('home')} className="text-sm font-medium hover:text-primary transition-colors">
                 Home
@@ -443,7 +443,7 @@ export default function CompanyWebsite() {
             <div className="space-y-4">
               <div className="flex items-center gap-2">
                 <img
-                  src="/logo.jpg"
+                  src="/terralabs-website/logo.jpg"
                   alt="Terra Labs Logo"
                   className="h-8 w-auto"
                 />
