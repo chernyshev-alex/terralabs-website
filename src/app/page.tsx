@@ -32,6 +32,8 @@ export default function CompanyWebsite() {
     subject: '',
     message: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [result, setResult] = useState<string | null>(null)
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
@@ -41,12 +43,42 @@ export default function CompanyWebsite() {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! We will get back to you soon.')
-    setFormData({ name: '', email: '', subject: '', message: '' })
+    setIsSubmitting(true)
+    setResult(null)
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: '83887f7e-2399-4d76-b221-f705f7908cf3',
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: 'Terra Labs Website'
+        })
+      })
+
+      const json = await response.json()
+
+      if (response.status === 200) {
+        setResult('Thank you! Your message has been sent successfully.')
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        setResult(json.message || 'Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      console.error(error)
+      setResult('Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const services = [
@@ -373,9 +405,14 @@ export default function CompanyWebsite() {
                         required
                       />
                     </div>
-                    <Button type="submit" className="w-full">
-                      Send Message
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </Button>
+                    {result && (
+                      <p className={`text-center text-sm ${result.includes('success') ? 'text-green-600' : 'text-red-600'}`}>
+                        {result}
+                      </p>
+                    )}
                   </form>
                 </CardContent>
               </Card>
@@ -386,13 +423,13 @@ export default function CompanyWebsite() {
                     <CardTitle>Contact Information</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex items-center gap-3">
+                    {/* <div className="flex items-center gap-3">
                       <Mail className="w-5 h-5 text-primary flex-shrink-0" />
                       <div>
                         <div className="text-sm font-medium">Email</div>
                         <div className="text-sm text-muted-foreground">chernyshev.alexander@gmail.com</div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="flex items-center gap-3">
                       <Phone className="w-5 h-5 text-primary flex-shrink-0" />
                       <div>

@@ -78,7 +78,7 @@ Once deployment completes:
 
 **Example:**
 ```
-https://alexchernyshev.github.io/terralabs-website
+https://chernyshev-alex.github.io/terralabs-website/
 ```
 
 Click the link to visit your live Terra Labs website! 🎊
